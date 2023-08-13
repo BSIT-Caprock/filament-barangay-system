@@ -22,4 +22,5 @@
 - [x] php artisan filament:install --panels
 - [x] php artisan make:filament-user
 - [x] change app name (logo.blade.php)
+- [x] barangay resource
 - [ ] php artisan make:model BarangayOfficial -mf
