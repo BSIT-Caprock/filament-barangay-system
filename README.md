@@ -16,7 +16,8 @@
 - [x] barangay schema
 - [x] barangay dataset
 - [x] barangay migrate
+- [x] set minimum stability to "dev"
+- [x] composer require livewire/livewire "^3.0@beta"
+- [x] composer require filament/filament:"^3.0-stable" -W
+- [ ] php artisan make:filament-user
 - [ ] php artisan make:model BarangayOfficial -mf
-- [ ] set minimum stability to "dev"
-- [ ] composer require livewire/livewire "^3.0@beta"
-- [ ] composer require filament/filament:"^3.0-stable" -W
