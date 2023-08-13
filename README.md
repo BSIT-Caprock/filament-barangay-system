@@ -19,5 +19,7 @@
 - [x] set minimum stability to "dev"
 - [x] composer require livewire/livewire "^3.0@beta"
 - [x] composer require filament/filament:"^3.0-stable" -W
-- [ ] php artisan make:filament-user
+- [x] php artisan filament:install --panels
+- [x] php artisan make:filament-user
+- [x] change app name (logo.blade.php)
 - [ ] php artisan make:model BarangayOfficial -mf
