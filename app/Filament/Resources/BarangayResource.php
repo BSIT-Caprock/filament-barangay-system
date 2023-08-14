@@ -31,8 +31,9 @@ class BarangayResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('region'),
+                Tables\Columns\TextColumn::make('region'), //this an eloquent attribute, do not make this searchable!
                 Tables\Columns\TextColumn::make('province')->searchable(),
+                Tables\Columns\TextColumn::make('municipality_or_city')->searchable(),
                 Tables\Columns\TextColumn::make('barangay_name')->label('Name of Barangay')->searchable(),
             ])
             ->filters([
