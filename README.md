@@ -30,88 +30,103 @@ setup:
 - [x] php artisan make:filament-user
 - [x] change app name (logo.blade.php)
 
-barangay keys:
-
-- [ ] php artisan make:model BarangayKey -mf
-- [ ] schema
-- [ ] model
-- [ ] factory
-- [ ] filament resource
-- [ ] filament form
-- [ ] filament table
-
 barangays:
 
-- [ ] php artisan make:model Barangay -mf
-- [ ] schema
-  - [ ] barangay key id
-  - [ ] region code
-  - [ ] region name
-  - [ ] city or municipality
-  - [ ] barangay code
-  - [ ] barangay name
-- [ ] model
-- [ ] factory
-- [ ] filament resource
-- [ ] filament form
-- [ ] filament table
+- [x] php artisan make:model Barangay -mf
+- [ ] model 
+  - [x] records(): $this->hasMany(BarangayRecord::class)
+  - [x] atestRecord(): $this->records()->one()->ofMany()
+  - [x] searchRecords($query, $columns, $search)
+- [ ] filament
+  - [x] php artisan make:filament-resource Barangay
+  - [x] list table // references barangay_records
+  - [x] php artisan make:filament-relation-manager BarangayResource records long_name --soft-deletes
+  - [x] create // show/create 1 record
+  - [x] edit // show/edit many records
+  - [x] relation manager
 
-household keys:
+barangay records:
 
-- [ ] php artisan make:model HouseholdKey -mf
+- [x] php artisan make:model BarangayRecord -mf
 - [ ] schema
+  - [x] barangay id
+  - [x] region code
+  - [x] region name
+  - [x] city or municipality
+  - [x] short name //abbreviation/short name
+  - [x] long name //complete name
 - [ ] model
+  - [x] protected $fillable
+  - [x] barangay(): $this->belongsTo(Barangay::class);
+- [x] filament resource
+- [ ] menu label
+- [ ] filament
+  - [x] php artisan make:filament-resource BarangayRecord
 - [ ] factory
-- [ ] filament resource
-- [ ] filament form
-- [ ] filament table
 
 households:
 
-- [ ] php artisan make:model Household -mf
-- [ ] schema
-  - [ ] household key id
-  - [ ] household number
-  - [ ] barangay id
+- [x] php artisan make:model Household -mf
+- [x] schema
 - [ ] model
+  - [x] records(): $this->hasMany(HouseholdRecord::class)
+  - [x] latestRecord(): $this->records()->one()->ofMany()
+  - [x] searchRecords($query, $columns, $search)
+- [ ] filament
+  - [x] php artisan make:filament-resource Household
+  - [x] php artisan make:filament-relation-manager HouseholdResource records number
+  - [x] list table
+  - [x] create // barangay dropdown, single record
+  - [x] edit // barangay dropdown, multiple records
 - [ ] factory
-- [ ] filament resource
-- [ ] filament form
-- [ ] filament table
 
-resident keys:
+household records:
 
-- [ ] php artisan make:model Resident -mf
+- [x] php artisan make:model Household -mf
 - [ ] schema
+  - [x] barangay record id
+  - [x] household id
+  - [x] number
 - [ ] model
+  - [x] protected $fillable
+  - [x] household(): $this->belongsTo(Household::class)
 - [ ] factory
-- [ ] filament resource
-- [ ] filament form
-- [ ] filament table
+- [ ] filament
+  - [x] php artisan make:filament-resource HouseholdRecord
 
 residents:
 
-- [ ] php artisan make:model Residents -mf
+- [x] php artisan make:model ResidentKey -mf
 - [ ] schema
-  - [ ] resident key id
-  - [ ] household id
-  - [ ] last name
-  - [ ] first name
-  - [ ] middle name
-  - [ ] name extension
-  - [ ] birth place
-  - [ ] birth date
-  - [ ] sex
-  - [ ] civil status
-  - [ ] citizenship
-  - [ ] occupation
-  - [ ] house number
-  - [ ] address id
-  - [ ] accomplished at
-  - [ ] accomplished by
-  - [ ] attested by
-  - [ ] left thumbmark
-  - [ ] right thumbmark
+- [ ] model
+- [ ] factory
+- [ ] filament resource
+- [ ] filament form
+- [ ] filament table
+
+resident records:
+
+- [ ] php artisan make:model Resident -mf
+- [ ] schema
+  - [x] resident key id
+  - [x] household id
+  - [x] last name
+  - [x] first name
+  - [x] middle name
+  - [x] name extension
+  - [x] birth place
+  - [x] birth date
+  - [x] sex
+  - [x] civil status
+  - [x] citizenship
+  - [x] occupation
+  - [x] house number
+  - [x] address id
+  - [x] accomplished at
+  - [x] accomplished by
+  - [x] attested by
+  - [x] left thumbmark
+    - [x] right thumbmark
 - [ ] model
 - [ ] factory
 - [ ] filament resource
@@ -128,7 +143,6 @@ addressses
 
 - [ ] php artisan make:model Residents -mf
 - [ ] schema
-  - [ ] barangay id
   - [ ] street
   - [ ] area
 

@@ -5,6 +5,7 @@ namespace App\Filament\Resources\BarangayResource\Pages;
 use App\Filament\Resources\BarangayResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Database\Eloquent\Model;
 
 class EditBarangay extends EditRecord
 {
@@ -16,4 +17,13 @@ class EditBarangay extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+
+    protected function handleRecordUpdate(Model $record, array $data): Model
+    {
+        # 1. 
+        $record->update($data);
+    
+        return $record;
+    }
+
 }

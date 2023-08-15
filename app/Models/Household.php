@@ -5,28 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Barangay extends Model
+class Household extends Model
 {
     use HasFactory;
-    //use SoftDeletes;
-
-    public function getRegionAttribute() 
-    {
-        return $this->region_code . ' - ' . $this->region_name;
-    }
-
+    
     public function records()
     {
-        return $this->hasMany(BarangayRecord::class);
+        return $this->hasMany(HouseholdRecord::class);
     }
 
     public function latestRecord() 
     {
         return $this->records()->one()->ofMany();
     }
-
 
     /**
      * search columns
