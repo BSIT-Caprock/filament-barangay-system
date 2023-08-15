@@ -20,16 +20,122 @@ Filament is a collection of full-stack components for accelerated Laravel develo
 
 ## To do
 
+setup:
+
 - [x] create laravel project
-- [x] php artisan make:model Barangay -mf
-- [x] barangay schema
-- [x] barangay dataset
-- [x] barangay migrate
 - [x] set minimum stability to "dev"
 - [x] composer require livewire/livewire "^3.0@beta"
 - [x] composer require filament/filament:"^3.0-stable" -W
 - [x] php artisan filament:install --panels
 - [x] php artisan make:filament-user
 - [x] change app name (logo.blade.php)
-- [x] barangay resource
+
+barangay keys:
+
+- [ ] php artisan make:model BarangayKey -mf
+- [ ] schema
+- [ ] model
+- [ ] factory
+- [ ] filament resource
+- [ ] filament form
+- [ ] filament table
+
+barangays:
+
+- [ ] php artisan make:model Barangay -mf
+- [ ] schema
+  - [ ] barangay key id
+  - [ ] region code
+  - [ ] region name
+  - [ ] city or municipality
+  - [ ] barangay code
+  - [ ] barangay name
+- [ ] model
+- [ ] factory
+- [ ] filament resource
+- [ ] filament form
+- [ ] filament table
+
+household keys:
+
+- [ ] php artisan make:model HouseholdKey -mf
+- [ ] schema
+- [ ] model
+- [ ] factory
+- [ ] filament resource
+- [ ] filament form
+- [ ] filament table
+
+households:
+
+- [ ] php artisan make:model Household -mf
+- [ ] schema
+  - [ ] household key id
+  - [ ] household number
+  - [ ] barangay id
+- [ ] model
+- [ ] factory
+- [ ] filament resource
+- [ ] filament form
+- [ ] filament table
+
+resident keys:
+
+- [ ] php artisan make:model Resident -mf
+- [ ] schema
+- [ ] model
+- [ ] factory
+- [ ] filament resource
+- [ ] filament form
+- [ ] filament table
+
+residents:
+
+- [ ] php artisan make:model Residents -mf
+- [ ] schema
+  - [ ] resident key id
+  - [ ] household id
+  - [ ] last name
+  - [ ] first name
+  - [ ] middle name
+  - [ ] name extension
+  - [ ] birth place
+  - [ ] birth date
+  - [ ] sex
+  - [ ] civil status
+  - [ ] citizenship
+  - [ ] occupation
+  - [ ] house number
+  - [ ] address id
+  - [ ] accomplished at
+  - [ ] accomplished by
+  - [ ] attested by
+  - [ ] left thumbmark
+  - [ ] right thumbmark
+- [ ] model
+- [ ] factory
+- [ ] filament resource
+- [ ] filament form
+- [ ] filament table
+
+birth places:
+
+- [ ] schema
+  - [ ] city or municipality
+  - [ ] province
+
+addressses
+
+- [ ] php artisan make:model Residents -mf
+- [ ] schema
+  - [ ] barangay id
+  - [ ] street
+  - [ ] area
+
+requests:
+
+- [ ] todo
+
+officials:
+
 - [ ] php artisan make:model BarangayOfficial -mf
