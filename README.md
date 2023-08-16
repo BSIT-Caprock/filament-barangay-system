@@ -38,7 +38,7 @@ Filament is a collection of full-stack components for accelerated Laravel develo
     - history
 - residents (latest records)
   - resident
-    - history
+    - history **important**
 
 #### Actions
 
@@ -92,6 +92,7 @@ Filament is a collection of full-stack components for accelerated Laravel develo
   - [x] edit
   - [x] delete
   - [x] delete unused keys
+  - [x] record history relation
 
 future:
 - [ ] birth places
