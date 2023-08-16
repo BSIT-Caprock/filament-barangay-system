@@ -18,7 +18,7 @@ return new class extends Migration
 
         Schema::create('barangays', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('barangay_id')->constrained('barangays')->cascadeOnDelete();
+            $table->foreignId('key_id')->constrained('barangay_keys')->cascadeOnDelete();
             $table->string('region_code');
             $table->string('region_name');
             $table->string('province');
@@ -34,7 +34,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('barangay_keys');
         Schema::dropIfExists('barangays');
+        
+        Schema::dropIfExists('barangay_keys');
     }
 };
