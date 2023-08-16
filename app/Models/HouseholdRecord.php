@@ -24,4 +24,9 @@ class HouseholdRecord extends Model
     {
         return $this->belongsTo(BarangayRecord::class);
     }
+
+    public function residentRecords()
+    {
+        return $this->hasMany(ResidentRecord::class);
+    }
 }

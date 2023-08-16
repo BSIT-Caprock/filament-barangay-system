@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\HouseholdResource\Pages;
+use Filament\Resources\RelationManagers\RelationGroup;
 use App\Filament\Resources\HouseholdResource\RelationManagers;
 use App\Models\BarangayRecord;
 use App\Models\Household;
@@ -71,7 +72,13 @@ class HouseholdResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\HouseholdRecordsRelationManager::class,
+            RelationGroup::make('Household members', [
+                RelationManagers\ResidentRecordsRelationManager::class,
+            ]),
+            RelationGroup::make('Details', [
+                RelationManagers\HouseholdRecordsRelationManager::class,
+            ]),
+            
         ];
     }
     
@@ -83,4 +90,19 @@ class HouseholdResource extends Resource
             'edit' => Pages\EditHousehold::route('/{record}/edit'),
         ];
     }    
+
+    public static function getFormSchema(string $section = null): array
+    {
+        return [
+            Forms\Components\Select::make('barangay_record_id')
+                ->required()
+                ->options(BarangayRecord::all()->pluck('short_and_long_name','id'))
+                ->searchable()
+                ->visibleOn('create'),
+
+            Forms\Components\TextInput::make('number')
+                ->required()
+                ->visibleOn('create'),
+        ];
+    }
 }

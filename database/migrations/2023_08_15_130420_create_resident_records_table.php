@@ -27,11 +27,11 @@ return new class extends Migration
             $table->string('citizenship');
             $table->string('occupation');
             $table->foreignId('residence_id')->constrained('residences');
-            $table->date('accomplished_at');
-            $table->string('accomplished_by');
-            $table->string('attested_by');
-            $table->string('left_thumbmark');
-            $table->string('right_thumbmark');
+            //$table->date('accomplished_at');
+            //$table->string('accomplished_by');
+            //$table->string('attested_by');
+            //$table->string('left_thumbmark');
+            //$table->string('right_thumbmark');
             $table->timestamps();
         });
     }

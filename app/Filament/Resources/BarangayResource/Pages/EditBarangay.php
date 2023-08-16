@@ -20,9 +20,7 @@ class EditBarangay extends EditRecord
 
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
-        # 1. 
         $record->update($data);
-    
         return $record;
     }
 

@@ -20,6 +20,11 @@ class Household extends Model
         return $this->records()->one()->ofMany();
     }
 
+    public function residentRecords()
+    {
+        return $this->hasManyThrough(ResidentRecord::class, HouseholdRecord::class);
+    }
+
     /**
      * search columns
      *

@@ -18,6 +18,64 @@ Barangay System made with Filament.
 
 Filament is a collection of full-stack components for accelerated Laravel development. They are beautifully designed, intuitive to use, and fully extensible - the perfect starting point for your next Laravel app. Why waste time building the same features over and over again?
 
+## Dev environments
+
+### dev1
+
+- database: barangay-system-dev1
+- branch: dev1
+- description: resources are based on entity keys
+
+#### User flow
+
+- barangays
+  - list barangay.latest_record
+    - actions
+      - create barangay.records
+    - widgets
+      - count barangays
+    - table
+      - row actions
+        - edit barangay.records
+  - create barangay.records
+    - actions
+      - new barangay.records
+      - cancel
+  - edit barangay.records
+    - list barangay.records
+      - actions
+        - create barangay.records
+        - edit barangay.records
+        - delete barangay.records
+    - delete barangay and all related records
+
+#### Tasks
+
+- [ ] git branch
+- [x] migrations
+- [x] models
+- [ ] 
+
+<hr>
+
+### dev2
+
+- database: barangay-system-dev2
+- branch: dev2
+- description: resources are based on entity records
+
+#### User flow
+
+
+
+#### Tasks
+
+
+
+
+<!-- 
+
+
 ## To do
 
 setup:
@@ -78,6 +136,7 @@ households:
   - [x] list table
   - [x] create // barangay dropdown, single record
   - [x] edit // barangay dropdown, multiple records
+  - [ ] php artisan make:filament-relation-manager HouseholdResource resident_records 
 - [ ] factory
 
 household records:
@@ -96,17 +155,22 @@ household records:
 
 residents:
 
-- [x] php artisan make:model ResidentKey -mf
-- [ ] schema
+- [x] php artisan make:model Resident -mf
+- [x] schema
 - [ ] model
+  - [x] records(): $this->hasMany(HouseholdRecord::class)
+  - [x] latestRecord(): $this->records()->one()->ofMany()
+- [ ] filament
+  - [x] php artisan make:filament-resource Resident
+  - [ ] php artisan make:filament-relation-manager ResidentResource resident_records 
+  - [ ] list table
+  - [ ] create
+  - [ ] edit
 - [ ] factory
-- [ ] filament resource
-- [ ] filament form
-- [ ] filament table
 
 resident records:
 
-- [ ] php artisan make:model Resident -mf
+- [x] php artisan make:model ResidentRecord -mf
 - [ ] schema
   - [x] resident key id
   - [x] household id
@@ -128,6 +192,8 @@ resident records:
   - [x] left thumbmark
     - [x] right thumbmark
 - [ ] model
+  - [x] protected $fillable
+  - [x] residence(): $this->belongsTo(Residence::class)
 - [ ] factory
 - [ ] filament resource
 - [ ] filament form
@@ -153,3 +219,5 @@ requests:
 officials:
 
 - [ ] php artisan make:model BarangayOfficial -mf
+
+ -->
