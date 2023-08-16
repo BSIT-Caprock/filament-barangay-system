@@ -31,6 +31,11 @@ class Barangay extends Model
         return $this->hasMany(self::class, 'key_id', 'key_id');
     }
 
+    public function latest_record() 
+    {
+        return $this->record_history()->one()->ofMany();
+    }
+
     public function households()
     {
         return $this->hasMany(Household::class);

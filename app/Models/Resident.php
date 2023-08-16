@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -35,6 +36,17 @@ class Resident extends Model
     public function record_history()
     {
         return $this->hasMany(self::class, 'key_id', 'key_id');
+    }
+
+    public function latest_record() 
+    {
+        return $this->record_history()->one()->ofMany();
+    }
+
+    public function scopeMostCurrent(Builder $query)
+    {
+        $latest = ResidentKey::with('latest_record')->get()->pluck('latest_record.id');
+        return $query->whereIn('id', $latest);
     }
 
     public function household()
