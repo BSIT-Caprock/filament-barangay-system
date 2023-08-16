@@ -27,11 +27,13 @@ class HouseholdResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('barangay_id')
-                    ->required()
+                    ->label('Barangay')
                     ->options(Barangay::pluck('long_name', 'id'))
-                    ->searchable(),
+                    ->searchable()
+                    ->required(),
 
                 Forms\Components\TextInput::make('number')
+                    ->label('Household number')
                     ->required(),
             ]);
     }
@@ -68,6 +70,7 @@ class HouseholdResource extends Resource
     public static function getRelations(): array
     {
         return [
+            RelationManagers\HouseholdMembersRelationManager::class,
             // RelationGroup::make('Household members', [
             //     RelationManagers\ResidentRecordsRelationManager::class,
             // ]),

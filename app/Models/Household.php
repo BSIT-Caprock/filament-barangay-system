@@ -31,7 +31,7 @@ class Household extends Model
         return $this->belongsTo(Barangay::class);
     }
 
-    public function residents()
+    public function household_members()
     {
         return $this->hasMany(Resident::class);
     }
