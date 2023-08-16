@@ -126,30 +126,27 @@ class BarangayResource extends Resource
 
                 Tables\Columns\TextColumn::make('id'),
 
-                Tables\Columns\TextColumn::make('latestRecord.id')
-                    ->label('Record #'),
-
-                Tables\Columns\TextColumn::make('latestRecord.region_code')
+                Tables\Columns\TextColumn::make('region_code')
                     ->label('Region code')
                     ->searchable(),
                 
-                Tables\Columns\TextColumn::make('latestRecord.region_name')
+                Tables\Columns\TextColumn::make('region_name')
                     ->label('Region name')
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('latestRecord.province')
+                Tables\Columns\TextColumn::make('province')
                     ->label('Province')
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('latestRecord.city_or_municipality')
+                Tables\Columns\TextColumn::make('city_or_municipality')
                     ->label('City / Municipality')
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('latestRecord.short_name')
+                Tables\Columns\TextColumn::make('short_name')
                     ->label('Abbreviation / Short name')
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('latestRecord.long_name')
+                Tables\Columns\TextColumn::make('long_name')
                     ->label('Name of barangay')
                     ->searchable(),
             ])
