@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\HouseholdResource\Pages;
 use Filament\Resources\RelationManagers\RelationGroup;
 use App\Filament\Resources\HouseholdResource\RelationManagers;
+use App\Models\Barangay;
 use App\Models\BarangayRecord;
 use App\Models\Household;
 use Filament\Forms;
@@ -25,15 +26,13 @@ class HouseholdResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('barangay_record_id')
+                Forms\Components\Select::make('barangay_id')
                     ->required()
-                    ->options(BarangayRecord::all()->pluck('short_and_long_name','id'))
-                    ->searchable()
-                    ->visibleOn('create'),
+                    ->options(Barangay::pluck('long_name', 'id'))
+                    ->searchable(),
 
                 Forms\Components\TextInput::make('number')
-                    ->required()
-                    ->visibleOn('create'),
+                    ->required(),
             ]);
     }
 
@@ -43,14 +42,11 @@ class HouseholdResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id'),
 
-                Tables\Columns\TextColumn::make('latestRecord.id')
-                    ->label('Record #'),
-                
-                Tables\Columns\TextColumn::make('latestRecord.number')
-                    ->label('Household number'),
-                
-                Tables\Columns\TextColumn::make('latestRecord.barangayRecord.short_and_long_name')
+                Tables\Columns\TextColumn::make('barangay.long_name')
                     ->label('Barangay'),
+
+                Tables\Columns\TextColumn::make('number')
+                    ->label('Household no.'),
 
             ])
             ->filters([
@@ -72,12 +68,12 @@ class HouseholdResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationGroup::make('Household members', [
-                RelationManagers\ResidentRecordsRelationManager::class,
-            ]),
-            RelationGroup::make('Details', [
-                RelationManagers\HouseholdRecordsRelationManager::class,
-            ]),
+            // RelationGroup::make('Household members', [
+            //     RelationManagers\ResidentRecordsRelationManager::class,
+            // ]),
+            // RelationGroup::make('Details', [
+            //     RelationManagers\HouseholdRecordsRelationManager::class,
+            // ]),
             
         ];
     }

@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\HouseholdResource\Pages;
 
 use App\Filament\Resources\HouseholdResource;
+use App\Models\HouseholdKey;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
@@ -14,6 +15,13 @@ class ListHouseholds extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
+            Actions\Action::make('delete_unused_keys')
+            ->color('danger')
+            ->requiresConfirmation()
+            ->action(function () {
+                $unused = HouseholdKey::has('records', '=', 0);
+                $unused->delete();
+            }),
         ];
     }
 }

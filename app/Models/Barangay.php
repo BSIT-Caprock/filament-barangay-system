@@ -12,7 +12,7 @@ class Barangay extends Model
     use HasFactory;
 
     protected $fillable = [
-        'barangay_id',
+        'key_id',
         'region_code',
         'region_name',
         'province',
@@ -29,6 +29,11 @@ class Barangay extends Model
     public function record_history()
     {
         return $this->hasMany(self::class, 'key_id', 'key_id');
+    }
+
+    public function households()
+    {
+        return $this->hasMany(Household::class);
     }
 
     //use SoftDeletes;

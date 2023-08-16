@@ -10,38 +10,24 @@ class Household extends Model
 {
     use HasFactory;
     
-    public function records()
+    protected $fillable = [
+        'key_id',
+        'barangay_id',
+        'number',
+    ];
+
+    public function record_key() 
     {
-        return $this->hasMany(HouseholdRecord::class);
+        return $this->belongsTo(HouseholdKey::class, 'key_id');
     }
 
-    public function latestRecord() 
+    public function record_history()
     {
-        return $this->records()->one()->ofMany();
+        return $this->hasMany(self::class, 'key_id', 'key_id');
     }
 
-    public function residentRecords()
+    public function barangay()
     {
-        return $this->hasManyThrough(ResidentRecord::class, HouseholdRecord::class);
-    }
-
-    /**
-     * search columns
-     *
-     * $columns are in ['column1' => where|orWhere, 'column2' => where|orWhere,..]
-     **/    
-    public function searchRecords(Builder $query, array $columns, string $search) 
-    {
-        return $query
-        ->whereHas('records', function (Builder $query) use ($columns, $search) {
-            foreach ($columns as $column => $whereType) {
-                if ($whereType == 'where') {
-                    $query->where($column, 'LIKE', "%{$search}%");
-                } elseif ($whereType == 'orWhere') {
-                    $query->orWhere($column, 'LIKE', "%{$search}%");
-                }
-                
-            }
-        });
+        return $this->belongsTo(Barangay::class);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Filament\Resources\HouseholdResource\Pages;
 
 use App\Filament\Resources\HouseholdResource;
 use App\Models\Household;
+use App\Models\HouseholdKey;
 use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Database\Eloquent\Model;
@@ -14,9 +15,11 @@ class CreateHousehold extends CreateRecord
 
     protected function handleRecordCreation(array $data): Model
     {
-        $household = new Household();
+        $key = new HouseholdKey();
+        $key->save();
+        $household = new Household($data);
+        $household->record_key()->associate($key);
         $household->save();
-        $household->records()->create($data);
         return $household;
     }
 }
