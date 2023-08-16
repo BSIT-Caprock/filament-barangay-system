@@ -41,7 +41,7 @@ class HouseholdMembersRelationManager extends RelationManager
                     ->label('Date of birth'),
                 
                 Forms\Components\Select::make('sex')
-                    ->label('Sex / Gender')
+                    ->label('Gender / sex')
                     ->options([
                         'F' => 'Female',
                         'M' => 'Male',
