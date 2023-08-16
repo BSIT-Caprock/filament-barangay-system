@@ -40,6 +40,14 @@ Filament is a collection of full-stack components for accelerated Laravel develo
   - resident
     - history
 
+#### Actions
+
+- create with new key
+- insert updated record
+- update existing record
+- delete record
+- delete key
+
 #### Forms
 
 - barangay
