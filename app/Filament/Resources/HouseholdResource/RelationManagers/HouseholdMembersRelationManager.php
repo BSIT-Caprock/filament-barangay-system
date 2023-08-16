@@ -1,42 +1,28 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\HouseholdResource\RelationManagers;
 
-use App\Filament\Resources\ResidentResource\Pages;
-use App\Filament\Resources\ResidentResource\RelationManagers;
-use App\Models\Household;
-use App\Models\HouseholdRecord;
-use App\Models\Residence;
+use App\Filament\Resources\ResidentResource;
 use App\Models\Resident;
-use App\Models\ResidentRecord;
-use Filament\Actions\CreateAction;
+use App\Models\ResidentKey;
 use Filament\Forms;
-use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Support\Colors\Color;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
+use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ResidentResource extends Resource
+class HouseholdMembersRelationManager extends RelationManager
 {
-    protected static ?string $model = Resident::class;
+    protected static string $relationship = 'household_members';
 
-    protected static ?string $navigationIcon = 'heroicon-o-users';
-
-    public static function form(Form $form): Form
+    public function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('household_id')
-                    ->label('Household')
-                    ->options(Household::all()->pluck('number', 'id'))
-                    ->required()
-                    ->searchable(),
-                
                 Forms\Components\TextInput::make('last_name')
                     ->required(),
                 
@@ -86,32 +72,38 @@ class ResidentResource extends Resource
                 Forms\Components\TextInput::make('area_name')
                     ->label('Name of subdivision / zone / sitio / purok (if applicable)'),
 
-                
             ]);
     }
 
-    public static function table(Table $table): Table
+    public function table(Table $table): Table
     {
         return $table
+            ->modelLabel('Household member')
+            // ->recordTitleAttribute('id')
             ->columns([
                 Tables\Columns\TextColumn::make('id'),
 
-                Tables\Columns\TextColumn::make('key_id'),
-                
+                Tables\Columns\TextColumn::make('record_key.id'),
+
                 Tables\Columns\TextColumn::make('last_name')
-                    ->searchable(),
-                
+                ->searchable(),
+            
                 Tables\Columns\TextColumn::make('first_name')
-                    ->searchable(),
-                
+                ->searchable(),
+            
                 Tables\Columns\TextColumn::make('birth_date'),
-                
+
             ])
             ->filters([
                 //
             ])
+            ->headerActions([
+                Tables\Actions\CreateAction::make(),
+            ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->slideOver(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -119,23 +111,14 @@ class ResidentResource extends Resource
                 ]),
             ])
             ->emptyStateActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()
+                    ->slideOver()
+                    ->mutateFormDataUsing(function (array $data): array {
+                        $key = new ResidentKey();
+                        $key->save();
+                        $data['key_id'] = $key->id;
+                        return $data;
+                    })
             ]);
     }
-    
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-    
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListResidents::route('/'),
-            'create' => Pages\CreateResident::route('/create'),
-            'edit' => Pages\EditResident::route('/{record}/edit'),
-        ];
-    }    
 }
