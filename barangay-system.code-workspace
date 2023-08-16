@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "app/Models"
+		},
+		{
+			"path": "app/Filament"
+		},
+		{
+			"path": "database/migrations"
+		}
+	],
+	"settings": {}
+}
