@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('civil_status');
             $table->string('citizenship');
             $table->string('occupation');
-            $table->string('house_numner');
+            $table->string('house_number');
             $table->string('street_name');
             $table->string('area_name');
             $table->timestamps();
