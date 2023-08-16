@@ -28,14 +28,26 @@ Filament is a collection of full-stack components for accelerated Laravel develo
 
 #### User flow
 
-- barangays
-- households
-  - list
-  - create
-  - edit
-  - delete unused keys
-  - 
-- residents
+- barangays (latest records)
+  - barangay 
+    - history
+- households (latest records)
+  - household
+    - household members
+      - resident history (new tab)
+    - history
+- residents (latest records)
+  - resident
+    - history
+
+#### Forms
+
+- barangay
+- household
+  - select barangay
+- resident
+  - select household
+  - select gender
 
 #### Tasks
 
