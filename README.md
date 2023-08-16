@@ -52,6 +52,7 @@ Filament is a collection of full-stack components for accelerated Laravel develo
 #### Tasks
 
 - [ ] git branch
+- [ ] database name
 - [x] migrations
 - [x] models
 - [ ] 
