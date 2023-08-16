@@ -21,17 +21,17 @@ return new class extends Migration
             $table->foreignId('household_id')->constrained('households');
             $table->string('last_name');
             $table->string('first_name');
-            $table->string('middle_name');
-            $table->string('name_extension');
-            $table->string('birth_place');
-            $table->date('birth_date');
+            $table->string('middle_name')->nullable();
+            $table->string('name_extension')->nullable();
+            $table->string('birth_place')->nullable();
+            $table->date('birth_date')->nullable();
             $table->string('sex');
             $table->string('civil_status');
             $table->string('citizenship');
-            $table->string('occupation');
-            $table->string('house_number');
+            $table->string('occupation')->nullable();
+            $table->string('house_number')->nullable();
             $table->string('street_name');
-            $table->string('area_name');
+            $table->string('area_name')->nullable();
             $table->timestamps();
         });
     }

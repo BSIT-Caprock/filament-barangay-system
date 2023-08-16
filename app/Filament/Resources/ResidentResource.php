@@ -33,9 +33,9 @@ class ResidentResource extends Resource
             ->schema([
                 Forms\Components\Select::make('household_id')
                     ->label('Household')
-                    ->required()
                     ->options(Household::all()->pluck('number', 'id'))
-                    ->searchable(),
+                    ->searchable()
+                    ->required(),
                 
                 Forms\Components\TextInput::make('last_name')
                     ->required(),
@@ -43,58 +43,48 @@ class ResidentResource extends Resource
                 Forms\Components\TextInput::make('first_name')
                     ->required(),
                 
-                Forms\Components\TextInput::make('middle_name')
-                    ->required(),
+                Forms\Components\TextInput::make('middle_name'),
                 
                 Forms\Components\TextInput::make('name_extension')
-                    ->label('Extension name')
-                    ->required(),
+                    ->label('Extension name'),
                 
                 Forms\Components\TextInput::make('birth_place')
-                    ->label('Place of birth')
-                    ->required(),
+                    ->label('Place of birth'),
                 
                 Forms\Components\DatePicker::make('birth_date')
-                    ->label('Date of birth')
-                    ->required(),
+                    ->label('Date of birth'),
                 
                 Forms\Components\Select::make('sex')
                     ->label('Sex / Gender')
-                    ->required()
                     ->options([
                         'F' => 'Female',
                         'M' => 'Male',
-                    ]),
+                    ])
+                    ->required(),
                 
                 Forms\Components\Select::make('civil_status')
                     ->label('Civil status')
-                    ->required()
                     ->options([
                         'S' => 'Single',
                         'M' => 'Married',
                         'W' => 'Widow / Widower',
                         'SE' => 'Separated',
-                    ]),
+                    ])
+                    ->required(),
                 
                 Forms\Components\TextInput::make('citizenship')
                     ->required(),
                 
                 Forms\Components\TextInput::make('occupation')
-                    ->label('Profession / occupation')
-                    ->required(),
-
+                    ->label('Profession / occupation'),
                 
-                Forms\Components\TextInput::make('house_number')
-                    ->required(),
-
+                Forms\Components\TextInput::make('house_number'),
                 
                 Forms\Components\TextInput::make('street_name')
                     ->required(),
-
                 
                 Forms\Components\TextInput::make('area_name')
-                    ->label('Name of subdivision / zone / sitio / purok (if applicable)')
-                    ->required(),
+                    ->label('Name of subdivision / zone / sitio / purok (if applicable)'),
 
                 
             ]);
