@@ -175,7 +175,7 @@ class BarangayResource extends Resource
                 self::getTC('province')
                     ->searchable(),
 
-                self::getTCe('city_or_municipality')
+                self::getTC('city_or_municipality')
                     ->searchable(),
 
                 self::getTC('short_name')
