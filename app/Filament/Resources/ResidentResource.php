@@ -5,17 +5,18 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ResidentResource\Pages;
 use App\Filament\Resources\ResidentResource\RelationManagers;
 use App\Models\Household;
-use App\Models\HouseholdRecord;
 use App\Models\Residence;
 use App\Models\Resident;
+use App\Models\ResidentKey;
 use App\Models\ResidentRecord;
 use Filament\Actions\CreateAction;
 use Filament\Forms;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Support\Colors\Color;
 use Filament\Tables;
+use Filament\Tables\Filters;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -62,7 +63,6 @@ class ResidentResource extends Resource
                 ->required(),
 
             'civil_status' => Forms\Components\Select::make('civil_status')
-                ->label('Civil status')
                 ->options([
                     'S' => 'Single',
                     'M' => 'Married',
@@ -90,71 +90,113 @@ class ResidentResource extends Resource
         return $components[$key];
     }
 
-    public static function getTC($key)
+    public static function getTC($key, $prefix = null)
     {
         $components = [
+            'id' => Tables\Columns\TextColumn::make($prefix .  'id'),
 
+            'key_id' => Tables\Columns\TextColumn::make($prefix . 'key_id'),
+
+            'household_id' => Tables\Columns\TextColumn::make($prefix . 'last_name'),
+
+            'last_name' => Tables\Columns\TextColumn::make($prefix . 'last_name'),
+
+            'first_name' => Tables\Columns\TextColumn::make($prefix . 'first_name'),
+
+            'middle_name' => Tables\Columns\TextColumn::make($prefix . 'middle_name'),
+
+            'name_extension' => Tables\Columns\TextColumn::make($prefix . 'name_extension')
+                ->label('Extension name'),
+
+            'birth_place' => Tables\Columns\TextColumn::make($prefix . 'birth_place')
+                ->label('Place of birth'),
+
+            'birth_date' => Tables\Columns\TextColumn::make($prefix . 'birth_date')
+                ->label('Date of birth'),
+
+            'sex' => Tables\Columns\TextColumn::make($prefix . 'sex')
+                ->label('Gender / sex'),
+
+            'civil_status' => Tables\Columns\TextColumn::make($prefix . 'civil_status'),
+
+            'citizenship' => Tables\Columns\TextColumn::make($prefix . 'citizenship'),
+
+            'occupation' => Tables\Columns\TextColumn::make($prefix . 'occupation')
+                ->label('Profession / occupation'),
+
+            'house_number' => Tables\Columns\TextColumn::make($prefix . 'house_number'),
+
+            'street_name' => Tables\Columns\TextColumn::make($prefix . 'street_name'),
+
+            'area_name' => Tables\Columns\TextColumn::make($prefix . 'area_name')
+                ->label('Name of subdivision / zone / sitio / purok (if applicable)'),
         ];
 
         return $components[$key];
     }
 
-
-
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                self::getFC('household_id'),
+                self::getFC('household_id')->hiddenOn('edit'),
                 
-                self::getFC('last_name'),
+                self::getFC('last_name')->hiddenOn('edit'),
                 
-                self::getFC('first_name'),
+                self::getFC('first_name')->hiddenOn('edit'),
                 
-                self::getFC('middle_name'),
+                self::getFC('middle_name')->hiddenOn('edit'),
                 
-                self::getFC('name_extension'),
+                self::getFC('name_extension')->hiddenOn('edit'),
                 
-                self::getFC('birth_place'),
+                self::getFC('birth_place')->hiddenOn('edit'),
                 
-                self::getFC('birth_date'),
+                self::getFC('birth_date')->hiddenOn('edit'),
                 
-                self::getFC('sex'),
+                self::getFC('sex')->hiddenOn('edit'),
                 
-                self::getFC('civil_status'),
+                self::getFC('civil_status')->hiddenOn('edit'),
                 
-                self::getFC('citizenship'),
+                self::getFC('citizenship')->hiddenOn('edit'),
                 
-                self::getFC('occupation'),
+                self::getFC('occupation')->hiddenOn('edit'),
                 
-                self::getFC('house_number'),
+                self::getFC('house_number')->hiddenOn('edit'),
                 
-                self::getFC('street_name'),
+                self::getFC('street_name')->hiddenOn('edit'),
                 
-                self::getFC('area_name'),
+                self::getFC('area_name')->hiddenOn('edit'),
 
             ]);
     }
 
     public static function table(Table $table): Table
     {
+        $prefix = '';
         return $table
+            ->modifyQueryUsing(fn (Builder $query) => $query->mostCurrent())
             ->columns([
-                Tables\Columns\TextColumn::make('id'),
+                self::getTC('id', $prefix),
 
-                Tables\Columns\TextColumn::make('key_id'),
+                self::getTC('key_id', $prefix),
                 
-                Tables\Columns\TextColumn::make('last_name')
-                    ->searchable(),
+                self::getTC('last_name', $prefix),
                 
-                Tables\Columns\TextColumn::make('first_name')
-                    ->searchable(),
+                self::getTC('first_name', $prefix),
                 
-                Tables\Columns\TextColumn::make('birth_date'),
-                
+                self::getTC('birth_date', $prefix),
+
             ])
             ->filters([
-                //
+                SelectFilter::make('sex')
+                    ->label('gender / sex')
+                    // ->query(function (Builder $query) {
+                    //     return Resident::withoutGlobalScopes();
+                    // })
+                    ->options([
+                        'F' => 'Female',
+                        'M' => 'Male',
+                    ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -172,7 +214,7 @@ class ResidentResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\RecordHistoryRelationManager::class,
         ];
     }
     
