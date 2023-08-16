@@ -31,40 +31,32 @@ class ResidentResource extends Resource
     {
         return $form
             ->schema([
-
-                // TODO: limit options to barangay session
-                Forms\Components\Select::make('household_record_id')
+                Forms\Components\Select::make('household_id')
                     ->label('Household')
                     ->required()
-                    ->options(HouseholdRecord::all()->pluck('number', 'id'))
-                    ->searchable()
-                    ->visibleOn('create'),
+                    ->options(Household::all()->pluck('number', 'id'))
+                    ->searchable(),
                 
                 Forms\Components\TextInput::make('last_name')
-                    ->required()
-                    ->visibleOn('create'),
+                    ->required(),
                 
                 Forms\Components\TextInput::make('first_name')
-                    ->required()
-                    ->visibleOn('create'),
+                    ->required(),
                 
                 Forms\Components\TextInput::make('middle_name')
-                    ->required()
-                    ->visibleOn('create'),
+                    ->required(),
                 
                 Forms\Components\TextInput::make('name_extension')
-                    ->required()
-                    ->visibleOn('create'),
+                    ->label('Extension name')
+                    ->required(),
                 
                 Forms\Components\TextInput::make('birth_place')
                     ->label('Place of birth')
-                    ->required()
-                    ->visibleOn('create'),
+                    ->required(),
                 
                 Forms\Components\DatePicker::make('birth_date')
                     ->label('Date of birth')
-                    ->required()
-                    ->visibleOn('create'),
+                    ->required(),
                 
                 Forms\Components\Select::make('sex')
                     ->label('Sex / Gender')
@@ -72,8 +64,7 @@ class ResidentResource extends Resource
                     ->options([
                         'F' => 'Female',
                         'M' => 'Male',
-                    ])
-                    ->visibleOn('create'),
+                    ]),
                 
                 Forms\Components\Select::make('civil_status')
                     ->label('Civil status')
@@ -83,40 +74,29 @@ class ResidentResource extends Resource
                         'M' => 'Married',
                         'W' => 'Widow / Widower',
                         'SE' => 'Separated',
-                    ])
-                    ->visibleOn('create'),
+                    ]),
                 
                 Forms\Components\TextInput::make('citizenship')
-                    ->required()
-                    ->visibleOn('create'),
+                    ->required(),
                 
                 Forms\Components\TextInput::make('occupation')
-                    ->required()
-                    ->visibleOn('create'),
+                    ->label('Profession / occupation')
+                    ->required(),
+
                 
-                Forms\Components\Select::make('residence_id')
-                    ->required()
-                    ->model(ResidentRecord::class)
-                    ->relationship('residence', 'fullAddress')
-                    ->searchable()
-                    ->preload()
-                    ->createOptionForm([
-                        Forms\Components\TextInput::make('house_number')
-                        ->required(),
-                        
-                        Forms\Components\TextInput::make('street_name')
-                        ->required(),
-                        
-                        Forms\Components\TextInput::make('area_name')
-                        ->label('Name of subdivision / zone / sitio / purok'),
-                        
-                    ])
-                    // ->createOptionUsing(function ($data) {
-                    //     $residence = new Residence($data);
-                    //     return $residence->id;
-                    // })
-                    // ->options(Residence::all()->pluck('fullAddress', 'id'))
-                    ->visibleOn('create'),
+                Forms\Components\TextInput::make('house_number')
+                    ->required(),
+
+                
+                Forms\Components\TextInput::make('street_name')
+                    ->required(),
+
+                
+                Forms\Components\TextInput::make('area_name')
+                    ->label('Name of subdivision / zone / sitio / purok (if applicable)')
+                    ->required(),
+
+                
             ]);
     }
 
@@ -125,18 +105,16 @@ class ResidentResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id'),
+
+                Tables\Columns\TextColumn::make('key_id'),
                 
-                Tables\Columns\TextColumn::make('latestRecord.id')
-                    ->label('Record #'),
+                Tables\Columns\TextColumn::make('last_name')
+                    ->searchable(),
                 
-                Tables\Columns\TextColumn::make('latestRecord.lastNameAndFirstName')
-                    ->label('Name'),
+                Tables\Columns\TextColumn::make('first_name')
+                    ->searchable(),
                 
-                Tables\Columns\TextColumn::make('latestRecord.birth_date')
-                    ->label('Birth date'),
-                
-                Tables\Columns\TextColumn::make('latestRecord.residence.fullAddress')
-                    ->label('Address'),
+                Tables\Columns\TextColumn::make('birth_date'),
                 
             ])
             ->filters([
