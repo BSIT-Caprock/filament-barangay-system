@@ -29,25 +29,13 @@ Filament is a collection of full-stack components for accelerated Laravel develo
 #### User flow
 
 - barangays
-  - list barangay.latest_record
-    - actions
-      - create barangay.records
-    - widgets
-      - count barangays
-    - table
-      - row actions
-        - edit barangay.records
-  - create barangay.records
-    - actions
-      - new barangay.records
-      - cancel
-  - edit barangay.records
-    - list barangay.records
-      - actions
-        - create barangay.records
-        - edit barangay.records
-        - delete barangay.records
-    - delete barangay and all related records
+- households
+  - list
+  - create
+  - edit
+  - delete unused keys
+  - 
+- residents
 
 #### Tasks
 
@@ -73,6 +61,8 @@ Filament is a collection of full-stack components for accelerated Laravel develo
   - [x] edit
   - [x] delete
   - [x] delete unused keys
+  - [x] household members relation  
+  - [ ] 
 - [ ] residents
   - [x] migration
   - [x] key model
