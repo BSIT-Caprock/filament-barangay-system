@@ -22,7 +22,7 @@ Filament is a collection of full-stack components for accelerated Laravel develo
 
 ### dev1
 
-- database: barangay-system-dev1
+- mysql database: `'database' => env('DB_DATABASE', 'DB_DATABASE'.'-dev1')`
 - branch: dev1
 - description: resources are based on entity keys
 
@@ -61,7 +61,7 @@ Filament is a collection of full-stack components for accelerated Laravel develo
 
 ### dev2
 
-- database: barangay-system-dev2
+- mysql database: `'database' => env('DB_DATABASE', 'DB_DATABASE'.'-dev2')`
 - branch: dev2
 - description: resources are based on entity records
 
