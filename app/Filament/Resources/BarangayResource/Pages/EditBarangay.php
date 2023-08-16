@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\BarangayResource\Pages;
 
 use App\Filament\Resources\BarangayResource;
+use App\Models\Barangay;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Database\Eloquent\Model;
@@ -17,11 +18,4 @@ class EditBarangay extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
-
-    protected function handleRecordUpdate(Model $record, array $data): Model
-    {
-        $record->update($data);
-        return $record;
-    }
-
 }

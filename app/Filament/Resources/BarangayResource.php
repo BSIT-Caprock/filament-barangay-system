@@ -28,29 +28,23 @@ class BarangayResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('region_code')
-                    ->required()
-                    ->visibleOn('create'),
+                    ->required(),
 
                 Forms\Components\TextInput::make('region_name')
-                    ->required()
-                    ->visibleOn('create'),
+                    ->required(),
 
                 Forms\Components\TextInput::make('province')
-                    ->required()
-                    ->visibleOn('create'),
+                    ->required(),
 
                 Forms\Components\TextInput::make('city_or_municipality')
                     ->label('City / Municipality')
-                    ->required()
-                    ->visibleOn('create'),
+                    ->required(),
 
                 Forms\Components\TextInput::make('short_name')
-                    ->required()
-                    ->visibleOn('create'),
+                    ->required(),
 
                 Forms\Components\TextInput::make('long_name')
-                    ->required()
-                    ->visibleOn('create'),
+                    ->required(),
 
                 // Forms\Components\Select::make('barangay_key_id')
                 //     //->relationship('barangayKey', 'id')
@@ -126,6 +120,8 @@ class BarangayResource extends Resource
 
                 Tables\Columns\TextColumn::make('id'),
 
+                Tables\Columns\TextColumn::make('key_id'),
+
                 Tables\Columns\TextColumn::make('region_code')
                     ->label('Region code')
                     ->searchable(),
@@ -169,7 +165,7 @@ class BarangayResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\BarangayRecordsRelationManager::class,
+            //RelationManagers\BarangayRecordsRelationManager::class,
         ];
     }
     

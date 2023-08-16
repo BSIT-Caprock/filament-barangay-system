@@ -23,12 +23,12 @@ class Barangay extends Model
 
     public function record_key() 
     {
-        return $this->belongsTo(self::class . 'Key');
+        return $this->belongsTo(BarangayKey::class, 'key_id');
     }
 
     public function record_history()
     {
-        return $this->hasMany(self::class, 'barangay_key_id', 'barangay_key_id');
+        return $this->hasMany(self::class, 'key_id', 'key_id');
     }
 
     //use SoftDeletes;
