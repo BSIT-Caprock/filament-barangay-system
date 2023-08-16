@@ -23,55 +23,31 @@ class HouseholdMembersRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('last_name')
-                    ->required(),
+                ResidentResource::getFC('last_name'),
+                    
+                ResidentResource::getFC('first_name'),
                 
-                Forms\Components\TextInput::make('first_name')
-                    ->required(),
+                ResidentResource::getFC('middle_name'),
                 
-                Forms\Components\TextInput::make('middle_name'),
+                ResidentResource::getFC('name_extension'),
                 
-                Forms\Components\TextInput::make('name_extension')
-                    ->label('Extension name'),
+                ResidentResource::getFC('birth_place'),
                 
-                Forms\Components\TextInput::make('birth_place')
-                    ->label('Place of birth'),
+                ResidentResource::getFC('birth_date'),
                 
-                Forms\Components\DatePicker::make('birth_date')
-                    ->label('Date of birth'),
+                ResidentResource::getFC('sex'),
                 
-                Forms\Components\Select::make('sex')
-                    ->label('Gender / sex')
-                    ->options([
-                        'F' => 'Female',
-                        'M' => 'Male',
-                    ])
-                    ->required(),
+                ResidentResource::getFC('civil_status'),
                 
-                Forms\Components\Select::make('civil_status')
-                    ->label('Civil status')
-                    ->options([
-                        'S' => 'Single',
-                        'M' => 'Married',
-                        'W' => 'Widow / Widower',
-                        'SE' => 'Separated',
-                    ])
-                    ->required(),
+                ResidentResource::getFC('citizenship'),
                 
-                Forms\Components\TextInput::make('citizenship')
-                    ->required(),
+                ResidentResource::getFC('occupation'),
                 
-                Forms\Components\TextInput::make('occupation')
-                    ->label('Profession / occupation'),
+                ResidentResource::getFC('house_number'),
                 
-                Forms\Components\TextInput::make('house_number'),
+                ResidentResource::getFC('street_name'),
                 
-                Forms\Components\TextInput::make('street_name')
-                    ->required(),
-                
-                Forms\Components\TextInput::make('area_name')
-                    ->label('Name of subdivision / zone / sitio / purok (if applicable)'),
-
+                ResidentResource::getFC('area_name'),
             ]);
     }
 

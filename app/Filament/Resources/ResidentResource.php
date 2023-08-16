@@ -27,66 +27,112 @@ class ResidentResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
+    public static function getFC($key)
+    {
+        $components = [
+            'household_id' => Forms\Components\Select::make('household_id')
+                ->label('Household')
+                ->options(Household::all()->pluck('number', 'id'))
+                ->searchable()
+                ->required(),
+            
+            'last_name' => Forms\Components\TextInput::make('last_name')
+                ->required(),
+
+            'first_name' => Forms\Components\TextInput::make('first_name')
+                ->required(),
+
+            'middle_name' => Forms\Components\TextInput::make('middle_name'),
+
+            'name_extension' => Forms\Components\TextInput::make('name_extension')
+                ->label('Extension name'),
+
+            'birth_place' => Forms\Components\TextInput::make('birth_place')
+                ->label('Place of birth'),
+
+            'birth_date' => Forms\Components\DatePicker::make('birth_date')
+                ->label('Date of birth'),
+
+            'sex' => Forms\Components\Select::make('sex')
+                ->label('Sex / Gender')
+                ->options([
+                    'F' => 'Female',
+                    'M' => 'Male',
+                ])
+                ->required(),
+
+            'civil_status' => Forms\Components\Select::make('civil_status')
+                ->label('Civil status')
+                ->options([
+                    'S' => 'Single',
+                    'M' => 'Married',
+                    'W' => 'Widow / Widower',
+                    'SE' => 'Separated',
+                ])
+                ->required(),
+
+            'citizenship' => Forms\Components\TextInput::make('citizenship')
+                ->required(),
+
+            'occupation' => Forms\Components\TextInput::make('occupation')
+                ->label('Profession / occupation'),
+
+            'house_number' => Forms\Components\TextInput::make('house_number'),
+
+            'street_name' => Forms\Components\TextInput::make('street_name')
+                ->required(),
+
+            'area_name' => Forms\Components\TextInput::make('area_name')
+                ->label('Name of subdivision / zone / sitio / purok (if applicable)'),
+
+        ];
+
+        return $components[$key];
+    }
+
+    public static function getTC($key)
+    {
+        $components = [
+
+        ];
+
+        return $components[$key];
+    }
+
+
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('household_id')
-                    ->label('Household')
-                    ->options(Household::all()->pluck('number', 'id'))
-                    ->required()
-                    ->searchable(),
+                self::getFC('household_id'),
                 
-                Forms\Components\TextInput::make('last_name')
-                    ->required(),
+                self::getFC('last_name'),
                 
-                Forms\Components\TextInput::make('first_name')
-                    ->required(),
+                self::getFC('first_name'),
                 
-                Forms\Components\TextInput::make('middle_name'),
+                self::getFC('middle_name'),
                 
-                Forms\Components\TextInput::make('name_extension')
-                    ->label('Extension name'),
+                self::getFC('name_extension'),
                 
-                Forms\Components\TextInput::make('birth_place')
-                    ->label('Place of birth'),
+                self::getFC('birth_place'),
                 
-                Forms\Components\DatePicker::make('birth_date')
-                    ->label('Date of birth'),
+                self::getFC('birth_date'),
                 
-                Forms\Components\Select::make('sex')
-                    ->label('Sex / Gender')
-                    ->options([
-                        'F' => 'Female',
-                        'M' => 'Male',
-                    ])
-                    ->required(),
+                self::getFC('sex'),
                 
-                Forms\Components\Select::make('civil_status')
-                    ->label('Civil status')
-                    ->options([
-                        'S' => 'Single',
-                        'M' => 'Married',
-                        'W' => 'Widow / Widower',
-                        'SE' => 'Separated',
-                    ])
-                    ->required(),
+                self::getFC('civil_status'),
                 
-                Forms\Components\TextInput::make('citizenship')
-                    ->required(),
+                self::getFC('citizenship'),
                 
-                Forms\Components\TextInput::make('occupation')
-                    ->label('Profession / occupation'),
+                self::getFC('occupation'),
                 
-                Forms\Components\TextInput::make('house_number'),
+                self::getFC('house_number'),
                 
-                Forms\Components\TextInput::make('street_name')
-                    ->required(),
+                self::getFC('street_name'),
                 
-                Forms\Components\TextInput::make('area_name')
-                    ->label('Name of subdivision / zone / sitio / purok (if applicable)'),
+                self::getFC('area_name'),
 
-                
             ]);
     }
 

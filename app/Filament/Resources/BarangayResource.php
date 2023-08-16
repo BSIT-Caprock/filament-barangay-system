@@ -23,28 +23,73 @@ class BarangayResource extends Resource
 
     //protected static ?string $navigationGroup = 'Barangay';
 
+    public static function getFC($key)
+    {
+        $components = [
+            'region_code' => Forms\Components\TextInput::make('region_code')
+                ->required(),
+
+            'region_name' => Forms\Components\TextInput::make('region_name')
+                ->required(),
+
+            'province' => Forms\Components\TextInput::make('province')
+                ->required(),
+
+            'city_or_municipality' => Forms\Components\TextInput::make('city_or_municipality')
+                ->label('City / Municipality')
+                ->required(),
+
+            'short_name' => Forms\Components\TextInput::make('short_name')
+                ->required(),
+
+            'long_name' => Forms\Components\TextInput::make('long_name')
+                ->required(),
+        ];
+        return $components[$key];
+    }
+
+    public static function getTC($key)
+    {
+        $components = [
+            'id' => Tables\Columns\TextColumn::make('id'),
+
+            'key_id' => Tables\Columns\TextColumn::make('key_id'),
+
+            'region_code' => Tables\Columns\TextColumn::make('region_code')
+                ->label('Region code'),
+
+            'region_name' => Tables\Columns\TextColumn::make('region_name')
+                ->label('Region name'),
+
+            'province' => Tables\Columns\TextColumn::make('province'),
+
+            'city_or_municipality' => Tables\Columns\TextColumn::make('city_or_municipality')
+                ->label('City / Municipality'),
+
+            'short_name' => Tables\Columns\TextColumn::make('short_name'),
+
+            'long_name' => Tables\Columns\TextColumn::make('long_name')
+                ->label('Name of barangay'),
+
+        ];
+        return $components[$key];
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('region_code')
-                    ->required(),
+                self::getFC('region_code'),
 
-                Forms\Components\TextInput::make('region_name')
-                    ->required(),
+                self::getFC('region_name'),
 
-                Forms\Components\TextInput::make('province')
-                    ->required(),
+                self::getFC('province'),
 
-                Forms\Components\TextInput::make('city_or_municipality')
-                    ->label('City / Municipality')
-                    ->required(),
+                self::getFC('city_or_municipality'),
 
-                Forms\Components\TextInput::make('short_name')
-                    ->required(),
+                self::getFC('short_name'),
 
-                Forms\Components\TextInput::make('long_name')
-                    ->required(),
+                self::getFC('long_name'),
 
                 // Forms\Components\Select::make('barangay_key_id')
                 //     //->relationship('barangayKey', 'id')
@@ -117,33 +162,26 @@ class BarangayResource extends Resource
                 // Tables\Columns\TextColumn::make('region')
                 //     ->getStateUsing(fn ($record) => $record->region_code . ' - ' . $record->region_name)
                 //     ->searchable(['region_code', 'region_name']),
+                self::getTC('id'),
 
-                Tables\Columns\TextColumn::make('id'),
+                self::getTC('key_id'),
 
-                Tables\Columns\TextColumn::make('key_id'),
-
-                Tables\Columns\TextColumn::make('region_code')
-                    ->label('Region code')
+                self::getTC('region_code')
                     ->searchable(),
                 
-                Tables\Columns\TextColumn::make('region_name')
-                    ->label('Region name')
+                self::getTC('region_name')
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('province')
-                    ->label('Province')
+                self::getTC('province')
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('city_or_municipality')
-                    ->label('City / Municipality')
+                self::getTCe('city_or_municipality')
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('short_name')
-                    ->label('Abbreviation / Short name')
+                self::getTC('short_name')
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('long_name')
-                    ->label('Name of barangay')
+                self::getTC('long_name')
                     ->searchable(),
             ])
             ->filters([
