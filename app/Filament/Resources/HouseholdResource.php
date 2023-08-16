@@ -95,7 +95,7 @@ class HouseholdResource extends Resource
         return [
             Forms\Components\Select::make('barangay_record_id')
                 ->required()
-                ->options(BarangayRecord::all()->pluck('short_and_long_name','id'))
+                ->options(Barangay::all()->pluck('long_name','id'))
                 ->searchable()
                 ->visibleOn('create'),
 
