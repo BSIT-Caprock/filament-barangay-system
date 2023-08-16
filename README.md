@@ -58,8 +58,21 @@ Filament is a collection of full-stack components for accelerated Laravel develo
   - [x] migration
   - [x] key model
   - [x] barangay model
+  - [x] resource
+  - [x] create
+  - [x] edit
+  - [x] delete
+  - [x] delete unused keys
+  - [ ] 
+- [ ] households
+  - [ ] migration
+  - [ ] key model
+  - [ ] barangay model
   - [ ] resource
-- [ ] 
+  - [ ] create
+  - [ ] edit
+  - [ ] delete
+  - [ ] delete unused keys
 
 future:
 - [ ] birth places
