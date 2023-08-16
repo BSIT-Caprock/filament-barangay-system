@@ -30,4 +30,9 @@ class Household extends Model
     {
         return $this->belongsTo(Barangay::class);
     }
+
+    public function residents()
+    {
+        return $this->hasMany(Resident::class);
+    }
 }

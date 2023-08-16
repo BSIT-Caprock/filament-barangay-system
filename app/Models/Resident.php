@@ -9,18 +9,36 @@ class Resident extends Model
 {
     use HasFactory;
 
-    public function records()
+    protected $fillable = [
+        'key_id',
+        'household_id',
+        'last_name',
+        'first_name',
+        'middle_name',
+        'name_extension',
+        'birth_place',
+        'birth_date',
+        'sex',
+        'civil_status',
+        'citizenship',
+        'occupation',
+        'house_number',
+        'street_name',
+        'area_name',
+    ];
+
+    public function record_key() 
     {
-        return $this->hasMany(ResidentRecord::class);
+        return $this->belongsTo(ResidentKey::class, 'key_id');
     }
 
-    public function latestRecord() 
+    public function record_history()
     {
-        return $this->records()->one()->ofMany();
+        return $this->hasMany(self::class, 'key_id', 'key_id');
     }
 
-    public function residence()
+    public function household()
     {
-        return $this->belongsTo(Residence::class);
+        return $this->belongsTo(Household::class);
     }
 }
