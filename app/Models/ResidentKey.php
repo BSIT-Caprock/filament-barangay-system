@@ -15,6 +15,11 @@ class ResidentKey extends Model
         return $this->hasMany(Resident::class, 'key_id');
     }
 
+    public function latestRecord() 
+    {
+        return $this->record_history()->one()->ofMany();
+    }
+
     public function scopeUnused(Builder $query)
     {
         return $query->has('records', '=', 0);

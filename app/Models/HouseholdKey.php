@@ -15,6 +15,11 @@ class HouseholdKey extends Model
         return $this->hasMany(Household::class, 'key_id');
     }
 
+    public function latestRecord() 
+    {
+        return $this->record_history()->one()->ofMany();
+    }
+
     public function scopeUnused(Builder $query)
     {
         return $query->has('records', '=', 0);
