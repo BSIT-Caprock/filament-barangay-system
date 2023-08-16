@@ -16,12 +16,11 @@ class ListResidents extends ListRecords
         return [
             Actions\CreateAction::make(),
             Actions\Action::make('delete_unused_keys')
-            ->color('danger')
-            ->requiresConfirmation()
-            ->action(function () {
-                $unused = ResidentKey::has('records', '=', 0);
-                $unused->delete();
-            }),
+                ->color('danger')
+                ->requiresConfirmation()
+                ->action(function () {
+                    ResidentKey::unused()->delete();
+                }),
         ];
     }
 }

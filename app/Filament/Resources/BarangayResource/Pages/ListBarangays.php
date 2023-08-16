@@ -19,8 +19,7 @@ class ListBarangays extends ListRecords
                 ->color('danger')
                 ->requiresConfirmation()
                 ->action(function () {
-                    $unused = BarangayKey::has('records', '=', 0);
-                    $unused->delete();
+                    BarangayKey::unused()->delete();
                 }),
         ];
     }
