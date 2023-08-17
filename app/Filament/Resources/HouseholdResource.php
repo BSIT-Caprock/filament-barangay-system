@@ -50,6 +50,16 @@ class HouseholdResource extends Resource
                 Tables\Columns\TextColumn::make('number')
                     ->label('Household no.'),
 
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+
             ])
             ->filters([
                 //
