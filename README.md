@@ -100,6 +100,7 @@ Filament is a collection of full-stack components for accelerated Laravel develo
   - [x] residency certificate model
   - [x] indigency certificate model
   - [ ] request resource
+  - [ ] receipt resource
 
 future:
 - [ ] birth places
