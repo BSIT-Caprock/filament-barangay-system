@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('sex')->nullable();
             $table->string('address')->nullable();
             $table->integer('age')->nullable();
-            $table->string('civil_status')->nullable();
+            $table->string('civil_status');
             $table->boolean('residency_certificate');
             $table->boolean('indigency_certificate');
             $table->text('message')->nullable();
