@@ -21,6 +21,9 @@ class HouseholdResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-home-modern';
 
+    protected static ?string $activeNavigationIcon = 'heroicon-m-home-modern';
+
+
     public static function form(Form $form): Form
     {
         return $form

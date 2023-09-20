@@ -12,6 +12,11 @@ class CreateHousehold extends CreateRecord
 {
     protected static string $resource = HouseholdResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
+
     protected function handleRecordCreation(array $data): Model
     {
         $household = new Household();

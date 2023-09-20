@@ -12,6 +12,11 @@ class CreateResident extends CreateRecord
 {
     protected static string $resource = ResidentResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
+
     protected function handleRecordCreation(array $data): Model
     {
         $resident = new Resident();

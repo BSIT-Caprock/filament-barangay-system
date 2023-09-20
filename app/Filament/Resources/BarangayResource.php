@@ -12,12 +12,16 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\Select;
+
 
 class BarangayResource extends Resource
 {
     protected static ?string $model = Barangay::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-building-library';
+
+    protected static ?string $activeNavigationIcon = 'heroicon-m-building-library';
 
     //protected static ?string $navigationLabel = 'Barangay History';
 
